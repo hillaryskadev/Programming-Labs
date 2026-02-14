@@ -20,18 +20,17 @@ int saveToBinary(const ContactList *list) {
     }
 
     // Tulis header
-    fwrite(MAGIC, 1, 8, file); // Magic number
+    fwrite(MAGIC, 1, 8, file);
 
     int version = VERSION;
-    fwrite(&version, sizeof(int), 1, file); // Version
+    fwrite(&version, sizeof(int), 1, file);
 
     int count = (int)list->size;
-    fwrite(&count, sizeof(int), 1, file); // Jumlah kontak
+    fwrite(&count, sizeof(int), 1, file);
 
     unsigned int checksum = calculateChecksum(list->contacts, list->size * sizeof(Contact));
-    fwrite(&checksum, sizeof(unsigned int), 1, file);  // Checksum data
+    fwrite(&checksum, sizeof(unsigned int), 1, file);
 
-    // Tulis data kontak
     if (list->size > 0) {
         fwrite(list->contacts, sizeof(Contact), list->size, file);
     }

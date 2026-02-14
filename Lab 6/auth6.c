@@ -43,7 +43,6 @@ int registerUser(UserList *list) {
     getStringInput(username, MAX_USERNAME, "Enter username: ");
     getStringInput(password, MAX_PASSWORD, "Enter password: ");
 
-    // Cek username sudah ada
     for (int i = 0; i < list->size; i++) {
         if (strcmp(list->users[i].username, username) == 0) {
             printf("Error: Username already exists!\n");

@@ -6,7 +6,7 @@
 #define USERS_FILE "users.dat"
 #define MAX_USERNAME 50
 #define MAX_PASSWORD 50
-#define HASH_SEED 12345  // Untuk hash sederhana
+#define HASH_SEED 12345
 
 typedef struct {
     char username[MAX_USERNAME];

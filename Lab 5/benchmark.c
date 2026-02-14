@@ -17,7 +17,6 @@ void run_benchmark(const char *filename) {
         FilterType type = f;
 
         double base_time = 0.0;
-        // Warm-up single-thread
         Image *temp = copy_image(img);
         double t1 = get_time();
         apply_filter_single(temp, type);
@@ -29,7 +28,7 @@ void run_benchmark(const char *filename) {
         for (int i = 1; i < n_threads; i++) {
             int nt = thread_counts[i];
             double total = 0.0;
-            for (int run = 0; run < 3; run++) {  // average 3 runs
+            for (int run = 0; run < 3; run++) {
                 Image *temp = copy_image(img);
                 double start = get_time();
                 apply_filter_multi(temp, type, nt);

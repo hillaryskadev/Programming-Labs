@@ -11,14 +11,12 @@ Image* load_ppm(const char *filename) {
     char buf[1024];
     int width, height, maxval;
 
-    // Baca magic number (skip comment)
     if (!fgets(buf, sizeof(buf), fp) || strncmp(buf, "P6", 2) != 0) {
         fprintf(stderr, "Not P6 PPM or error reading magic\n");
         fclose(fp);
         return NULL;
     }
 
-    // Baca width height (skip comment)
     while (fgets(buf, sizeof(buf), fp)) {
         if (buf[0] == '#') continue;  // skip comment
         if (sscanf(buf, "%d %d", &width, &height) == 2) break;
@@ -29,7 +27,6 @@ Image* load_ppm(const char *filename) {
         return NULL;
     }
 
-    // Baca maxval (skip comment)
     while (fgets(buf, sizeof(buf), fp)) {
         if (buf[0] == '#') continue;
         if (sscanf(buf, "%d", &maxval) == 1) break;
@@ -40,7 +37,6 @@ Image* load_ppm(const char *filename) {
         return NULL;
     }
 
-    // Skip whitespace sampai data binary
     int c;
     while ((c = fgetc(fp)) != EOF) {
         if (c != ' ' && c != '\t' && c != '\n' && c != '\r') {

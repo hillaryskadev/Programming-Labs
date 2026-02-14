@@ -19,28 +19,24 @@ int save_contact_list_sdf(const ContactList *list, const char *username) {
         contact_obj->value.object.count = 4;
         contact_obj->value.object.pairs = calloc(4, sizeof(SdfNode*));
 
-        // name
         SdfNode *n = calloc(1, sizeof(SdfNode));
         n->type = SDF_STRING;
         n->key = strdup("name");
         n->value.string_val = strdup(list->contacts[i].name);
         contact_obj->value.object.pairs[0] = n;
 
-        // phone
         n = calloc(1, sizeof(SdfNode));
         n->type = SDF_STRING;
         n->key = strdup("phone");
         n->value.string_val = strdup(list->contacts[i].phone);
         contact_obj->value.object.pairs[1] = n;
 
-        // email
         n = calloc(1, sizeof(SdfNode));
         n->type = SDF_STRING;
         n->key = strdup("email");
         n->value.string_val = strdup(list->contacts[i].email);
         contact_obj->value.object.pairs[2] = n;
 
-        // group
         n = calloc(1, sizeof(SdfNode));
         n->type = SDF_NUMBER;
         n->key = strdup("group");

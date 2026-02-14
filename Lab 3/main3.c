@@ -5,7 +5,7 @@ int main() {
     ContactList list;
     initContactList(&list);
 
-    loadFromBinary(&list); // Auto load saat mulai
+    loadFromBinary(&list);
 
     int choice;
     do {

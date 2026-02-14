@@ -16,7 +16,7 @@ typedef enum {
 
 typedef struct SdfNode {
     SdfType type;
-    char *key;                // hanya untuk member object
+    char *key;
     union {
         char *string_val;
         double number_val;

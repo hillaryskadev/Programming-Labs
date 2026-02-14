@@ -171,7 +171,6 @@ void apply_filter_multi(Image *img, FilterType type, int num_threads) {
         pthread_join(threads[i], NULL);
     }
 
-    // Copy hasil kembali ke img asli
     for (int i = 0; i < img->height; i++) {
         memcpy(img->pixels[i], output->pixels[i], img->width * sizeof(Pixel));
     }
