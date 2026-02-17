@@ -19,7 +19,6 @@ int saveToBinary(const ContactList *list) {
         return 0;
     }
 
-    // Tulis header
     fwrite(MAGIC, 1, 8, file);
 
     int version = VERSION;
@@ -28,7 +27,8 @@ int saveToBinary(const ContactList *list) {
     int count = (int)list->size;
     fwrite(&count, sizeof(int), 1, file);
 
-    unsigned int checksum = calculateChecksum(list->contacts, list->size * sizeof(Contact));
+    size_t dataSize = list->size * sizeof(Contact);
+    unsigned int checksum = (list->size > 0) ? calculateChecksum(list->contacts, dataSize) : 0;
     fwrite(&checksum, sizeof(unsigned int), 1, file);
 
     if (list->size > 0) {
@@ -49,8 +49,8 @@ int loadFromBinary(ContactList *list) {
 
     char magic[9] = {0};
     fread(magic, 1, 8, file);
-    if (strcmp(magic, MAGIC) != 0) {
-        printf("Error: File corrupted (invalid magic number).\n");
+    if (strncmp(magic, MAGIC, 8) != 0) {
+        printf("Error: Invalid magic number.\n");
         fclose(file);
         return 0;
     }
@@ -58,7 +58,7 @@ int loadFromBinary(ContactList *list) {
     int version;
     fread(&version, sizeof(int), 1, file);
     if (version != VERSION) {
-        printf("Error: Unsupported file version.\n");
+        printf("Error: Unsupported version.\n");
         fclose(file);
         return 0;
     }
@@ -90,7 +90,7 @@ int loadFromBinary(ContactList *list) {
         return 0;
     }
 
-    unsigned int calcChecksum = calculateChecksum(temp, count * sizeof(Contact));
+    unsigned int calcChecksum = (count > 0) ? calculateChecksum(temp, count * sizeof(Contact)) : 0;
     if (calcChecksum != storedChecksum) {
         printf("Error: File corrupted (checksum mismatch).\n");
         free(temp);

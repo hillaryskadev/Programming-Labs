@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/byanperdana/Desktop/ContactAppUpgrade",
-      "program": "/Users/byanperdana/Desktop/ContactAppUpgrade/build/Debug/outDebug"
+      "cwd": ".",
+      "program": "build/Debug/outDebug"
     }
   ]
 }

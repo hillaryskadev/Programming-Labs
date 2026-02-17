@@ -5,6 +5,7 @@ int main() {
     ContactList list;
     initContactList(&list);
 
+    // Auto load saat program mulai
     loadFromBinary(&list);
 
     int choice;
@@ -17,16 +18,16 @@ int main() {
         printf("5. Display All Contacts\n");
         printf("6. Save to Binary File\n");
         printf("7. Load from Binary File\n");
-        printf("8. Exit\n");
+        printf("8. Exit (auto save)\n");
         printf("Enter choice: ");
-        
+
         if (scanf("%d", &choice) != 1) {
             printf("Error: Invalid input.\n");
             clearInputBuffer();
             continue;
         }
         clearInputBuffer();
-        
+
         switch (choice) {
             case 1: addContact(&list); break;
             case 2: deleteContact(&list); break;
@@ -42,7 +43,7 @@ int main() {
             default: printf("Invalid choice.\n");
         }
     } while (choice != 8);
-    
+
     freeContactList(&list);
     return 0;
 }

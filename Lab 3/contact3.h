@@ -24,14 +24,19 @@ typedef struct {
     int capacity;
 } ContactList;
 
+// Deklarasi fungsi
 void initContactList(ContactList *list);
+void freeContactList(ContactList *list);
+
 void addContact(ContactList *list);
 void deleteContact(ContactList *list);
 void updateContact(ContactList *list);
+
 void displayContact(ContactList *list);
 void displayAllContacts(ContactList *list);
-void freeContactList(ContactList *list);
+
 int isValidEmail(const char *email);
 void clearInputBuffer();
+void getStringInput(char *buffer, int max_len, const char *prompt);
 
 #endif
